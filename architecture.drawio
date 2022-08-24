@@ -1,0 +1,37 @@
+<mxfile host="65bd71144e">
+    <diagram id="7cheuIGSzondjQH9T7Bg" name="Page-1">
+        <mxGraphModel dx="820" dy="478" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="5" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="2" target="4">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+                    <mxGeometry x="20" y="60" width="50" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="" style="edgeStyle=none;html=1;fontSize=15;" edge="1" parent="1" source="4" target="6">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="&lt;span style=&quot;font-size: 15px&quot;&gt;Rest&amp;nbsp; API&amp;nbsp;&amp;nbsp;&lt;br&gt;Verify humanity&lt;br&gt;(GET request)&lt;br&gt;&lt;/span&gt;" style="whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="170" y="60" width="140" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="" style="edgeStyle=none;html=1;fontSize=15;" edge="1" parent="1" source="6" target="8">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="&lt;span style=&quot;font-size: 15px&quot;&gt;Smart contract &lt;br&gt;( ABI )&lt;br&gt;&lt;br&gt;&lt;/span&gt;" style="whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="390" y="60" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="" style="edgeStyle=none;html=1;fontSize=15;" edge="1" parent="1" source="8" target="10">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="Chainlink node&lt;br&gt;AnyApi&lt;br&gt;&lt;br&gt;Jobs&lt;br&gt;Tasks" style="whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="620" y="60" width="120" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="Exernal adapters" style="whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="620" y="275" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
