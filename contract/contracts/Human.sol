@@ -19,6 +19,7 @@ contract Human is Context {
     }
 
     function isVerified() public pure returns (bool) {
-        return (true);
+        // call some functions perform some computations
+        return (true); // return the verification status
     }
 }
