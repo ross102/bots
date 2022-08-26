@@ -25,6 +25,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         permanent: false,
       },
     };
+  } else {
+    return {
+      redirect: {
+        destination: "/protected",
+        permanent: false,
+      },
+    };
   }
 
   return {

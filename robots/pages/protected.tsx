@@ -1,14 +1,22 @@
 import React from "react";
-import dynamic from "next/dynamic";
 import { GetServerSidePropsContext } from "next";
+import styles from "../styles/Home.module.css";
 import { getSession, signOut } from "next-auth/react";
+import dynamic from "next/dynamic";
+const Persona: any = dynamic((): any => import("../components/Inquiry"), {
+  ssr: false,
+});
 
-import PersonaClient from "../components/Inquiry";
+//import PersonaClient from "../components/Inquiry";
 
 // gets a prop from getServerSideProps
 function Protected({ user }: any) {
   console.log(user);
-  return <PersonaClient />;
+  return (
+    <div className={styles.wrapper}>
+      <Persona />
+    </div>
+  );
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {

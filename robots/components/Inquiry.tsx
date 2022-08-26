@@ -1,12 +1,10 @@
-import dynamic from "next/dynamic";
-const Persona: any = dynamic((): any => import("persona"), {
-  ssr: false,
-});
+import Persona from "persona";
 
 const InlineInquiry = () => {
   return (
     <Persona.Inquiry
-      templateId={process.env.TEMPLATE_ID}
+      frameHeight="300px"
+      templateId="itmpl_b6SWjM42vGXGVhJSZ4ad1VWL"
       environment="sandbox"
       onLoad={() => {
         console.log("Loaded inline");
