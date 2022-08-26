@@ -8,7 +8,7 @@ function Home({ user }: any) {
     <div>
       <h4>User session:</h4>
       <pre>{JSON.stringify(user, null, 2)}</pre>
-      {/* <button onClick={() => signOut()}>Sign out</button> */}
+      <button onClick={() => signOut()}>Sign out</button>
     </div>
   );
 }
