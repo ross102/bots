@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 
-import Head from "next/Head";
+import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
