@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { InjectedConnector } from "wagmi/connectors/injected";
+
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { signIn } from "next-auth/react";
 import { useAccount, useConnect, useSignMessage, useDisconnect } from "wagmi";
@@ -44,7 +45,7 @@ const Signin: NextPage = () => {
     try {
       await signIn("credentials", { message, signature, redirect: false });
       // redirects to main page
-      push("/");
+      push("/protected");
     } catch (e) {
       return;
     }

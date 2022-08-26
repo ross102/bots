@@ -1,17 +1,14 @@
+import React from "react";
+import dynamic from "next/dynamic";
 import { GetServerSidePropsContext } from "next";
 import { getSession, signOut } from "next-auth/react";
 
-// gets a prop from getServerSideProps
-function Home({ user }: any) {
-  console.log(user);
+import PersonaClient from "../components/Inquiry";
 
-  return (
-    <div>
-      <h4>Home page</h4>
-      {/* <pre>{JSON.stringify(user, null, 2)}</pre>
-      <button onClick={() => signOut()}>Sign out</button>1 */}
-    </div>
-  );
+// gets a prop from getServerSideProps
+function Protected({ user }: any) {
+  console.log(user);
+  return <PersonaClient />;
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
@@ -32,4 +29,4 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   };
 }
 
-export default Home;
+export default Protected;
