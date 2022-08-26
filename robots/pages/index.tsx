@@ -3,7 +3,6 @@ import { getSession, signOut } from "next-auth/react";
 
 // gets a prop from getServerSideProps
 function Home({ user }: any) {
-  console.log("=========");
   console.log(user);
   return (
     <div>
