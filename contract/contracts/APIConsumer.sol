@@ -4,15 +4,23 @@ pragma solidity ^0.8.7;
 import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
+/**
+ * @title The APIConsumer contract
+ * @notice An API Consumer contract that makes GET requests to obtain 24h trading volume of ETH in USD
+ */
 contract APIConsumer is ChainlinkClient, Ownable {
   using Chainlink for Chainlink.Request;
 
-  uint256 public status;
   address private immutable oracle;
   bytes32 private immutable jobId;
   uint256 private immutable fee;
+  string private path;
+  string private endpoint;
 
-  event RequestStatus(bytes32 indexed requestId, uint256 status);
+  mapping(bytes32 => address) private s_RequestIdToUser;
+  mapping(address => bytes32) s_UserToVerificationStatus;
+
+  event DataFullfilled(bytes32 status);
 
   /**
    * @notice Executes once when a contract is created to initialize state variables
@@ -22,9 +30,10 @@ contract APIConsumer is ChainlinkClient, Ownable {
    * @param _fee - node operator price per API call / data request
    * @param _link - LINK token address on the corresponding network
    *
-   * Network: goerli
-   * Oracle: 0xCC79157eb46F5624204f47AB42b3906cAA40eaB7
-   * Job ID: ca98366cc7314957b8c012c72f05aeeb
+   * * Goerli Testnet details:
+   * Link Token: 0x326C977E6efc84E512bB9C30f76E30c160eD06FB
+   * Oracle: 0xCC79157eb46F5624204f47AB42b3906cAA40eaB7 (Chainlink DevRel)
+   * jobId: 7da2702f37fd48e5b1b9a5715e3509b6 (bytes)
    * Fee: 0.1 LINK
    */
   constructor(
@@ -43,45 +52,66 @@ contract APIConsumer is ChainlinkClient, Ownable {
     fee = _fee;
   }
 
+  function getVerificationStatus(address _user)
+    external
+    view
+    returns (bytes32)
+  {
+    return s_UserToVerificationStatus[_user];
+  }
+
+  function setQueryParams(string memory _path, string memory _endpoint)
+    public
+    onlyOwner
+  {
+    path = _path;
+    endpoint = _endpoint;
+  }
+
   /**
-   * Create a Chainlink request to retrieve API response, find the target
-   * data.
+   * @notice Creates a Chainlink request to retrieve API response, find the target
+   * data, then multiply by 1000000000000000000 (to remove decimal places from data).
+   *
+   * @return requestId - id of the request
    */
-  function RequestStatusData() public returns (bytes32 requestId) {
-    Chainlink.Request memory req = buildChainlinkRequest(
+  function requestHumanStatus() public returns (bytes32 requestId) {
+    Chainlink.Request memory request = buildChainlinkRequest(
       jobId,
       address(this),
       this.fulfill.selector
     );
-
     // Set the URL to perform the GET request on
-    req.add("get", "https://onlyhuman.vercel.app/api/...");
-
-    req.add("path", "status, approved"); // Chainlink nodes 1.0.0 and later support this format
-
+    request.add("get", string(abi.encodePacked(endpoint, msg.sender)));
+    // Chainlink nodes prior to 1.0.0 support this format
+    request.add("path", path); // Chainlink nodes 1.0.0 and later support this format
+    s_RequestIdToUser[requestId] = msg.sender;
     // Sends the request
-    return sendChainlinkRequestTo(oracle, req, fee);
+    return sendChainlinkRequestTo(oracle, request, fee);
   }
 
   /**
-   * Receive the response in the form of uint256
+   * @notice Receives the response in the form of uint256
+   *
+   * @param _requestId - id of the request
+   * @param _status - response; requested 24h trading volume of ETH in USD
    */
-  function fulfill(bytes32 _requestId, uint256 _status)
+  function fulfill(bytes32 _requestId, bytes32 _status)
     public
     recordChainlinkFulfillment(_requestId)
   {
-    emit RequestStatus(_requestId, _status);
-    status = _status;
+    s_UserToVerificationStatus[s_RequestIdToUser[_requestId]] = _status;
+    emit DataFullfilled(_status);
   }
 
   /**
-   * Allow withdraw of Link tokens from the contract
+   * @notice Witdraws LINK from the contract
+   * @dev Implement a withdraw function to avoid locking your LINK in the contract
    */
-  function withdrawLink() public view onlyOwner {
+  function withdrawLink() public onlyOwner {
     LinkTokenInterface link = LinkTokenInterface(chainlinkTokenAddress());
-    // require(
-    //     link.transfer(msg.sender, link.balanceOf(address(this))),
-    //     "Unable to transfer"
-    // );
+    require(
+      link.transfer(msg.sender, link.balanceOf(address(this))),
+      "Unable to transfer"
+    );
   }
 }

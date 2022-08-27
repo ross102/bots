@@ -1,25 +1,33 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.16;
+pragma solidity ^0.8.7;
+
+import {APIConsumer} from "./APIConsumer.sol";
 
 abstract contract Context {
-    function _msgSender() internal view virtual returns (address) {
-        return msg.sender;
-    }
+  function _msgSender() internal view virtual returns (address) {
+    return msg.sender;
+  }
 }
 
 contract Human is Context {
-    modifier onlyHuman() {
-        _isVerified();
-        _;
-    }
+  bytes32 public constant status = "approved";
+  address private constant consumerContract =
+    0xCC79157eb46F5624204f47AB42b3906cAA40eaB7; // fillup
+  APIConsumer consumer = APIConsumer(consumerContract);
 
-    function _isVerified() internal view virtual {
-        require(isVerified() == true, "has not pass human verification");
-    }
+  modifier onlyHuman() {
+    _isVerified();
+    _;
+  }
 
-    function isVerified() public pure returns (bool) {
-        // call some functions perform some computations
-        return (true); // return the verification status
-    }
+  function _isVerified() internal view virtual {
+    require(isVerified() == true, "has not pass human verification");
+  }
+
+  function isVerified() public view returns (bool) {
+    bytes32 _status = consumer.getVerificationStatus(_msgSender());
+    if (_status == status) return true;
+    return false; // return the verification status
+  }
 }
