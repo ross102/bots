@@ -13,7 +13,7 @@ const deployAPIConsumer: DeployFunction = async (
 
   const linkTokenAddress: string = "0x326C977E6efc84E512bB9C30f76E30c160eD06FB";
   const oracle: string = "0xCC79157eb46F5624204f47AB42b3906cAA40eaB7";
-  const jobId = ethers.utils.toUtf8Bytes("7da2702f37fd48e5b1b9a5715e3509b6");
+  const jobId = ethers.utils.toUtf8Bytes("7d80a6386ef543a3abb52817f6707e3b");
   const fee: string = "100000000000000000";
   const fundAmount: BigNumber = BigNumber.from("1000000000000000000");
 

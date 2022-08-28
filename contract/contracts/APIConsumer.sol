@@ -18,9 +18,9 @@ contract APIConsumer is ChainlinkClient, Ownable {
   string private endpoint;
 
   mapping(bytes32 => address) private s_RequestIdToUser;
-  mapping(address => bytes32) s_UserToVerificationStatus;
+  mapping(address => string) s_UserToVerificationStatus;
 
-  event DataFullfilled(bytes32 status);
+  event DataFullfilled(string status);
 
   /**
    * @notice Executes once when a contract is created to initialize state variables
@@ -33,7 +33,7 @@ contract APIConsumer is ChainlinkClient, Ownable {
    * * Goerli Testnet details:
    * Link Token: 0x326C977E6efc84E512bB9C30f76E30c160eD06FB
    * Oracle: 0xCC79157eb46F5624204f47AB42b3906cAA40eaB7 (Chainlink DevRel)
-   * jobId: 7da2702f37fd48e5b1b9a5715e3509b6 (bytes)
+   * jobId: 7d80a6386ef543a3abb52817f6707e3b (string)
    * Fee: 0.1 LINK
    */
   constructor(
@@ -52,14 +52,21 @@ contract APIConsumer is ChainlinkClient, Ownable {
     fee = _fee;
   }
 
+  /**
+   * @notice gets an adresses verification status.
+   * @return bytes32, the verification status (pending, approved, complete. etc)
+   */
   function getVerificationStatus(address _user)
     external
     view
-    returns (bytes32)
+    returns (string memory)
   {
     return s_UserToVerificationStatus[_user];
   }
 
+  /**
+   * @notice sets the chainlink params, can be updated anytime if the endpoint changes
+   */
   function setQueryParams(string memory _path, string memory _endpoint)
     public
     onlyOwner
@@ -70,7 +77,7 @@ contract APIConsumer is ChainlinkClient, Ownable {
 
   /**
    * @notice Creates a Chainlink request to retrieve API response, find the target
-   * data, then multiply by 1000000000000000000 (to remove decimal places from data).
+   * data.
    *
    * @return requestId - id of the request
    */
@@ -90,12 +97,12 @@ contract APIConsumer is ChainlinkClient, Ownable {
   }
 
   /**
-   * @notice Receives the response in the form of uint256
+   * @notice Receives the response in the form of bytes32
    *
    * @param _requestId - id of the request
-   * @param _status - response; requested 24h trading volume of ETH in USD
+   * @param _status - response; requested verification status
    */
-  function fulfill(bytes32 _requestId, bytes32 _status)
+  function fulfill(bytes32 _requestId, string memory _status)
     public
     recordChainlinkFulfillment(_requestId)
   {
