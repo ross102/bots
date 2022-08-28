@@ -1,6 +1,6 @@
 # onlyHuman 
 
-This project demonstrates  how to use chainlink oracles to introduce kYC check at smart-contract level. 
+This project demonstrates  the use chainlink oracles to introduce kYC check at smart-contract level. 
 onlyHuman is a smart-contract modifier that requires the msg.sender to have completed the kYC on persona identity.
 Contract method with onlyHuman modifier will revert if the caller has not passed kYC.
 
