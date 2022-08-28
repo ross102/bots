@@ -26,6 +26,7 @@
  Yarn hardhat deploy --networ goerli 
  Yarn hardhat run scripts/setQeueryParams --network goerli  
  ``` 
+Please switch to branch <contract> to view the actual code
  You can check an already deployed contract at https://goerli.etherscan.io/address/0x9Eb6dd0D51522a6aece199B77c431995e58697eB 
   
  Calling the contract method requestHumaStatus() initiates a chainlink request. And a request is sent to the API endpoint specified 
