@@ -21,16 +21,16 @@ async function main() {
     `Attaching APIConsumer contract interface to address ${consumerAddress}`
   );
 
-  const ballotContract: APIConsumer = new Contract(
+  const consumerContract: APIConsumer = new Contract(
     consumerAddress,
     consumerInterface,
     signer
   ) as APIConsumer;
 
-  console.log(`casting vote to ballot from ${deployer}`);
-  const tx = await ballotContract.setQueryParams(
-    "0,id",
-    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=10"
+  console.log(`seting params from ${deployer}`);
+  const tx = await consumerContract.setQueryParams(
+    "status",
+    "https://areyouhuman-ross102.vercel.app/api/verification/persona/"
   );
   console.log("Awaiting confirmations");
   await tx.wait();
