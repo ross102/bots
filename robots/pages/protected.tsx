@@ -1,6 +1,5 @@
 import React from "react";
 import { GetServerSidePropsContext } from "next";
-import styles from "../styles/Home.module.css";
 import { getSession, signOut } from "next-auth/react";
 import dynamic from "next/dynamic";
 const Persona = dynamic((): any => import("../components/Inquiry"), {
@@ -9,11 +8,7 @@ const Persona = dynamic((): any => import("../components/Inquiry"), {
 
 // gets a prop from getServerSideProps
 function Protected({ user }: any) {
-  return (
-    <div className={styles.wrapper}>
-      <Persona user={user} />
-    </div>
-  );
+  return <Persona user={user} />;
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
