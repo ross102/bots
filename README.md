@@ -1,4 +1,4 @@
-# onlyHuman  
+# onlyHuman  
   
  This project demonstrates  the use of chainlink oracles to introduce kYC check at smart-contract level.  
  onlyHuman is a smart-contract modifier that requires the msg.sender to have completed the kYC on persona identity. 
@@ -8,12 +8,13 @@
   
  First 
  Set your environment variables 
- - ETHERSCAN_API_KEY= secret 
- - PRIVATE_KEY= secret 
- - REPORT_GAS= Boolean (true/false) 
- - GOERLI_URL=RPC endpoint  
+
+ - ETHERSCAN_API_KEY=secret 
+ - PRIVATE_KEY=secret 
+ - REPORT_GAS= Boolean (true/false) 
+ - GOERLI_URL=RPC endpoint  
   
- ## Deploy your contracts 
+ ## Deploy your contracts 
  You need to ensure that you have the correct jobid and oracle address 
  Refer to this https://documentation-woad-five.vercel.app/docs/any-api/testnet-oracles/ 
   
