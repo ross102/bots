@@ -2,9 +2,9 @@
 
 This project demonstrates  the use of chainlink oracles to introduce kYC check at smart-contract level. 
 onlyHuman is a smart-contract modifier that requires the msg.sender to have completed the kYC on persona identity.
-Contract method with onlyHuman modifier will revert if the caller has not passed kYC.
+Contract methods with onlyHuman modifier will revert if the caller has not passed kYC.
 
-This project uses chainlink any API and persona identity solution.
+This project uses chainlink any API, moralis Auth and persona identity solutions.
 
 First
 Set your environment variables
@@ -29,9 +29,9 @@ You can check an already deployed contract at https://goerli.etherscan.io/addres
 
 Calling the contract method requestHumaStatus() initiates a chainlink request. And a request is sent to the API endpoint specified
 
-Call s_usertoverification() this returns the verification status. (Approved, completed, pending, rejected etc)
+Call s_usertoverificationstatus() this returns the verification status. (Approved, completed, pending, rejected etc)
 
-To verify your identity,
+## To verify your identity,
 
 ```shell
 Cd robots
