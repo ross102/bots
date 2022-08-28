@@ -25,10 +25,23 @@ Yarn hardhat compile
 Yarn hardhat deploy --networ goerli
 Yarn hardhat run scripts/setQeueryParams --network goerli 
 ```
+You can check an already deployed contract at https://goerli.etherscan.io/address/0x9Eb6dd0D51522a6aece199B77c431995e58697eB
+
+Calling the contract method requestHumaStatus() initiates a chainlink request. And a request is sent to the API endpoint specified
+
+Call s_usertoverification() this returns the verification status. (Approved, completed, pending, rejected etc)
+
 To verify your identity,
+
 ```shell
 Cd robots
 Yarn dev
 ```
 
 Visit localhost:3000 to verify your identity with persona.
+
+1. Connect with your wallet
+2. Authenticate with moralis+ nextjs Auth and sign your signature
+3. After login you can be able to access the persona flow
+4. Fill in the required details and click submit.
+5. Wait for your verification to be approved.
