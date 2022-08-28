@@ -30,17 +30,22 @@ const HumanStatus: NextPage = (props: any) => {
   };
 
   useEffect(() => {
-    const client: any = new Persona.Client({
-      templateId: "itmpl_b6SWjM42vGXGVhJSZ4ad1VWL",
-      environment: "sandbox",
-      referenceId: userData?.user.address,
-      onReady: () => client.open(),
-      onComplete: async ({ inquiryId, status }) => {
-        submit(inquiryId, status);
-      },
-      onCancel: ({ inquiryId, sessionToken }) => console.log("onCancel"),
-      onError: (error) => console.log(error),
-    });
+    (() => {
+      const client: any = new Persona.Client({
+        templateId: "itmpl_b6SWjM42vGXGVhJSZ4ad1VWL",
+        environment: "sandbox",
+        referenceId: userData?.user.address,
+        onReady: () => {
+          client.open();
+        },
+        onComplete: async ({ inquiryId, status }) => {
+          submit(inquiryId, status);
+        },
+        onCancel: ({ inquiryId, sessionToken }) => console.log("onCancel"),
+        onError: (error) => console.log(error),
+      });
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <div className={styles.wrapper}>Loading ...</div>;
