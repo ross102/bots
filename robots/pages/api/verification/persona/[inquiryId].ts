@@ -12,8 +12,7 @@ export default async function handler(
   try {
     // verify from persona
     const resp = await Areyouhuman.checkPersona(inquiryId);
-    let data = resp.data.attributes;
-    data = ethers.utils.formatBytes32String(data);
+    let data = resp.data.attributes.status;
     res.status(200).json({ status: data });
   } catch (error: any) {
     console.log(error.response);

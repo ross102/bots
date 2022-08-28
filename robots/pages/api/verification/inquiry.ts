@@ -16,7 +16,7 @@ export default async function handler(
   };
 
   try {
-    Areyouhuman.createInquiry(userData);
+    await Areyouhuman.createInquiry(userData);
     res.status(200).json({ message: "success", user: userData });
   } catch (error: any) {
     console.log(error.response);
