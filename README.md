@@ -8,10 +8,10 @@ This project uses chainlink any API and persona identity solution.
 
 First
 Set your environment variables
-ETHERSCAN_API_KEY= secret
-PRIVATE_KEY= secret
-REPORT_GAS= Boolean (true/false)
-GOERLI_URL=RPC endpoint 
+- ETHERSCAN_API_KEY= secret
+- PRIVATE_KEY= secret
+- REPORT_GAS= Boolean (true/false)
+- GOERLI_URL=RPC endpoint 
 
 Deploy your contracts
 You need to ensure that you have the correct jobid and oracle address
