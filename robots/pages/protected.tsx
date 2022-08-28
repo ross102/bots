@@ -1,13 +1,17 @@
+import React from "react";
 import { GetServerSidePropsContext } from "next";
+import styles from "../styles/Home.module.css";
 import { getSession, signOut } from "next-auth/react";
+import dynamic from "next/dynamic";
+const Persona = dynamic((): any => import("../components/Inquiry"), {
+  ssr: false,
+}) as any;
 
 // gets a prop from getServerSideProps
-function Home() {
+function Protected({ user }: any) {
   return (
-    <div>
-      <h4>Home page</h4>
-      {/* <pre>{JSON.stringify(user, null, 2)}</pre> 
-      <button onClick={() => signOut()}>Sign out</button>*/}
+    <div className={styles.wrapper}>
+      <Persona user={user} />
     </div>
   );
 }
@@ -16,20 +20,18 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getSession(context);
 
   //   // redirect if not authenticated
-  if (session) {
+  if (!session) {
     return {
       redirect: {
-        destination: "/protected",
+        destination: "/signin",
         permanent: false,
       },
     };
   }
 
   return {
-    redirect: {
-      destination: "/signin",
-    },
+    props: { user: session },
   };
 }
 
-export default Home;
+export default Protected;

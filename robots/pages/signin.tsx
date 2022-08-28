@@ -1,13 +1,12 @@
 import type { NextPage } from "next";
-
+import baseApi from "../components/utils/baseApi";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { InjectedConnector } from "wagmi/connectors/injected";
-import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+
 import { signIn } from "next-auth/react";
 import { useAccount, useConnect, useSignMessage, useDisconnect } from "wagmi";
 import { useRouter } from "next/router";
-import axios from "axios";
 
 //login
 
@@ -31,11 +30,7 @@ const Signin: NextPage = () => {
     const userData = { address: account, chain: chain.id, network: "evm" };
     console.log(userData);
 
-    const { data } = await axios.post("/api/auth/request-message", userData, {
-      headers: {
-        "content-type": "application/json",
-      },
-    });
+    const { data } = await baseApi.post("/api/auth/request-message", userData);
 
     const message = data.message;
 
@@ -43,8 +38,8 @@ const Signin: NextPage = () => {
 
     try {
       await signIn("credentials", { message, signature, redirect: false });
-      // redirects to main page
-      push("/");
+      // redirects to protected page
+      push("/protected");
     } catch (e) {
       return;
     }

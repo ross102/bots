@@ -1,4 +1,6 @@
 import Moralis from "moralis";
+import process from "../../../components/utils/types";
+import db from "../../../components/utils/db";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const future = new Date();
@@ -7,14 +9,6 @@ future.setDate(future.getDate() + 30);
 const statement = "Please sign this message to confirm your identity.";
 const timeout = 60;
 const expiration_time = future.toISOString();
-
-declare let process: {
-  env: {
-    APP_DOMAIN: string;
-    NEXTAUTH_URL: string;
-    MORALIS_API_KEY: string;
-  };
-};
 
 export default async function handler(
   req: NextApiRequest,
