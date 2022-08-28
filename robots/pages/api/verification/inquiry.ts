@@ -1,4 +1,4 @@
-import db from "../../../components/utils/db";
+import Areyouhuman from "../../../components/utils/services";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -16,8 +16,7 @@ export default async function handler(
   };
 
   try {
-    await db.push(`/${referenceId}/verify`, userData);
-
+    Areyouhuman.createInquiry(userData);
     res.status(200).json({ message: "success", user: userData });
   } catch (error: any) {
     console.log(error.response);
