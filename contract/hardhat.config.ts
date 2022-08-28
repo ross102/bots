@@ -9,6 +9,7 @@ import "hardhat-gas-reporter";
 import "solidity-coverage";
 import "hardhat-deploy";
 import "@appliedblockchain/chainlink-plugins-fund-link";
+import "@nomicfoundation/hardhat-toolbox";
 
 dotenv.config();
 

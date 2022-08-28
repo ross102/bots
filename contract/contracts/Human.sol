@@ -11,8 +11,8 @@ abstract contract Context {
 }
 
 contract Human is Context {
-  string public constant status = "approved";
-  address constant consumerContract = ""; // fillup
+  address constant consumerContract =
+    0x9Eb6dd0D51522a6aece199B77c431995e58697eB; // fillup
   APIConsumer consumer = APIConsumer(consumerContract);
 
   modifier onlyHuman() {
@@ -25,8 +25,9 @@ contract Human is Context {
   }
 
   function isVerified() public view returns (bool) {
-    string _status = consumer.getVerificationStatus(_msgSender());
-    if (_status == status) return true;
+    string memory status = "approved";
+    string memory _status = consumer.getVerificationStatus(_msgSender());
+    if (keccak256(bytes(_status)) == keccak256(bytes(status))) return true;
     return false; // return the verification status
   }
 }

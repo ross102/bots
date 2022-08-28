@@ -29,8 +29,8 @@ async function main() {
 
   console.log(`casting vote to ballot from ${deployer}`);
   const tx = await ballotContract.setQueryParams(
-    "status",
-    "https://verify.vercel.app/api/verification/"
+    "0,id",
+    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=10"
   );
   console.log("Awaiting confirmations");
   await tx.wait();
