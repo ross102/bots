@@ -13,7 +13,7 @@ Set your environment variables
 - REPORT_GAS= Boolean (true/false)
 - GOERLI_URL=RPC endpoint 
 
-Deploy your contracts
+## Deploy your contracts
 You need to ensure that you have the correct jobid and oracle address
 Refer to this https://documentation-woad-five.vercel.app/docs/any-api/testnet-oracles/
 
@@ -29,6 +29,6 @@ To verify your identity,
 ```shell
 Cd robots
 Yarn dev
-'''
+```
 
 Visit localhost:3000 to verify your identity with persona.
