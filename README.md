@@ -32,9 +32,9 @@ Please switch to branch **contract** to view the actual code
  Calling the contract method requestHumaStatus() initiates a chainlink request. And a request is sent to the API endpoint specified 
   
  Call s_usertoverificationstatus() this returns the verification status. (Approved, completed, pending, rejected etc) 
-  
- ## To verify your identity, 
-  
+
+## To verify your identity 
+
  ```shell 
  Cd robots 
  Yarn dev 
