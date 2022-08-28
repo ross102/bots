@@ -2,11 +2,13 @@ import type { NextPage } from "next";
 import Persona from "persona";
 import baseApi from "./utils/baseApi";
 import { uuid } from "uuidv4";
+import styles from "../styles/Home.module.css";
+import { useEffect } from "react";
 
 const HumanStatus: NextPage = (props: any) => {
+  const userData = props.user;
   //send inquiry to
   const submit = async (inquiry: string, status: string) => {
-    let userData = props.user;
     try {
       const data = await baseApi.post("/api/verification/inquiry", {
         id: uuid(),
@@ -27,19 +29,21 @@ const HumanStatus: NextPage = (props: any) => {
     );
   };
 
-  return (
-    <Persona.Inquiry
-      templateId="itmpl_b6SWjM42vGXGVhJSZ4ad1VWL"
-      environment="sandbox"
-      onLoad={() => {
-        console.log("Loaded inline");
-      }}
-      onComplete={async ({ inquiryId, status }: any) => {
-        // Inquiry completed. Optionally tell your server about it.
-        return submit(inquiryId, status);
-      }}
-    />
-  );
+  useEffect(() => {
+    const client: any = new Persona.Client({
+      templateId: "itmpl_b6SWjM42vGXGVhJSZ4ad1VWL",
+      environment: "sandbox",
+      referenceId: userData?.user.address,
+      onReady: () => client.open(),
+      onComplete: async ({ inquiryId, status }) => {
+        submit(inquiryId, status);
+      },
+      onCancel: ({ inquiryId, sessionToken }) => console.log("onCancel"),
+      onError: (error) => console.log(error),
+    });
+  }, []);
+
+  return <div className={styles.wrapper}>Loading ...</div>;
 };
 
 export default HumanStatus;
