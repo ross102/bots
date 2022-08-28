@@ -8,33 +8,9 @@
   box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
 }
 
-/* .wrapper .name {
-  font-weight: 600;
-  font-size: 1.4rem;
-  letter-spacing: 1.3px;
-  padding-left: 10px;
-  color: #555;
+.verify {
+  height: 600px;
 }
-
-.wrapper .form-field input {
-  width: 100%;
-  display: block;
-  border: none;
-  outline: none;
-  background: none;
-  font-size: 1.2rem;
-  color: #666;
-  padding: 10px 15px 10px 10px;
-   border: 1px solid red; 
-}
-
-.wrapper .form-field {
-  padding-left: 10px;
-  margin-bottom: 20px;
-  border-radius: 20px;
-  box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
-}
- */
 
 .wrapper .btn {
   box-shadow: none;

@@ -2,14 +2,12 @@ import { GetServerSidePropsContext } from "next";
 import { getSession, signOut } from "next-auth/react";
 
 // gets a prop from getServerSideProps
-function Home({ user }: any) {
-  console.log(user);
-
+function Home() {
   return (
     <div>
       <h4>Home page</h4>
-      {/* <pre>{JSON.stringify(user, null, 2)}</pre>
-      <button onClick={() => signOut()}>Sign out</button>1 */}
+      {/* <pre>{JSON.stringify(user, null, 2)}</pre> 
+      <button onClick={() => signOut()}>Sign out</button>*/}
     </div>
   );
 }
@@ -18,14 +16,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getSession(context);
 
   //   // redirect if not authenticated
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/signin",
-        permanent: false,
-      },
-    };
-  } else {
+  if (session) {
     return {
       redirect: {
         destination: "/protected",
@@ -35,7 +26,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   }
 
   return {
-    props: { user: session },
+    redirect: {
+      destination: "/signin",
+    },
   };
 }
 
