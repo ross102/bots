@@ -2,6 +2,7 @@ import { JsonDB } from "node-json-db";
 import { Config } from "node-json-db/dist/lib/JsonDBConfig";
 import type { IcreateInquiry } from "./types";
 import baseApi from "./baseApi";
+import persona from "./persona";
 
 class AreyouHuman {
   db: JsonDB;
@@ -13,10 +14,11 @@ class AreyouHuman {
 
   async createInquiry(userData: IcreateInquiry) {
     const { referenceId } = userData;
-    return await this.db.push(`/${referenceId}/verify`, userData);
+    await this.db.push(`/${referenceId}/verify`, userData);
+    return this.db.save();
   }
 
-  async getStatus(referenceId: string | string[] | undefined) {
+  async getInquiryId(referenceId: string | string[] | undefined) {
     const data = await this.db.getData(`/${referenceId}/verify`);
     const { inquiryId } = data;
     return inquiryId;
@@ -27,13 +29,28 @@ class AreyouHuman {
     return data;
   }
 
-  async checkPersona(inquiryId: string | string[] | undefined) {
-    return await baseApi.get(`/api/verification/persona/` + inquiryId, {
-      headers: {
-        "content-type": "application/json",
-        Authorization: `Bearer ${process.env.TOKEN}`,
-      },
-    });
+  async getInquiryStatus(inquiryId: string) {
+    return await fetch(
+      `https://withpersona.com/api/v1/inquiries/${inquiryId}`,
+      {
+        headers: {
+          Accept: "application/json",
+          "Persona-Version": "2021-07-05",
+          Authorization: `Bearer ${process.env.TOKEN}`,
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.errors) {
+          return response.errors[0].title;
+        } else {
+          return response.data.attributes.status;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }
 

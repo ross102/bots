@@ -1,7 +1,9 @@
 import type { NextPage } from "next";
 import baseApi from "../components/utils/baseApi";
-import Head from "next/head";
+
 import styles from "../styles/Home.module.css";
+// import { GetServerSidePropsContext } from "next";
+// import { getSession, signOut } from "next-auth/react";
 import { InjectedConnector } from "wagmi/connectors/injected";
 
 import { signIn } from "next-auth/react";
@@ -47,12 +49,9 @@ const Signin: NextPage = () => {
 
   return (
     <div>
-      <Head>
-        <title>Login</title>
-      </Head>
       <div className={styles.wrapper}>
         <form className="p-3 mt-3">
-          <h3>Are you a robot ?</h3>
+          <h3>Are you human ?</h3>
 
           <p>Lets find out</p>
           <div className="d-flex align-items-center">

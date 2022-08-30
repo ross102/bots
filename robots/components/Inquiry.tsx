@@ -18,7 +18,9 @@ const HumanStatus: NextPage = (props: any) => {
         profileId: userData.user.profileId,
         status,
       });
-
+      if (data.data.message) {
+        window.location.href = "/completed";
+      }
       console.log(data);
     } catch (error: any) {
       console.log(error.response);
@@ -48,10 +50,9 @@ const HumanStatus: NextPage = (props: any) => {
       });
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [userData.user.address]);
 
-  return <div className={styles.wrapper}>Loading ...</div>;
-
+  return <div className={styles.wrapper}>Loading ...please wait</div>;
 };
 
 export default HumanStatus;

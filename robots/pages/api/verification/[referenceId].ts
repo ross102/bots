@@ -9,8 +9,8 @@ export default async function handler(
   const { referenceId } = req.query;
 
   try {
-    const resp = await Areyouhuman.getStatus(referenceId);
-    res.status(200).json({ status: resp });
+    const InquiryId = await Areyouhuman.getInquiryId(referenceId);
+    res.status(200).json({ status: InquiryId });
   } catch (error: any) {
     console.log(error.response);
     res.status(400).json({ error });
