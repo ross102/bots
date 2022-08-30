@@ -50,7 +50,7 @@ const HumanStatus: NextPage = (props: any) => {
       console.log("Cancelled");
     },
     onError: (error) => {
-      setStatus("Error, Try Again");
+      setStatus("Error, kindly Try Again");
       console.log(error);
     },
   });
