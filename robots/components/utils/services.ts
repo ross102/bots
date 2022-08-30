@@ -1,8 +1,7 @@
 import { JsonDB } from "node-json-db";
 import { Config } from "node-json-db/dist/lib/JsonDBConfig";
 import type { IcreateInquiry } from "./types";
-import baseApi from "./baseApi";
-import persona from "./persona";
+import process from "./types";
 
 class AreyouHuman {
   db: JsonDB;

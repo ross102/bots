@@ -26,7 +26,7 @@ const getInquiryStatus = async (inquiryId: string) =>
     headers: {
       Accept: "application/json",
       "Persona-Version": "2021-07-05",
-      Authorization: `Bearer ${process.env.PERSONA_API_KEY}`,
+      Authorization: `Bearer ${process.env.TOKEN}`,
     },
   })
     .then((response) => response.json())

@@ -33,11 +33,7 @@ const HumanStatus: NextPage = (props: any) => {
   };
 
   const client: any = new Persona.Client({
-<<<<<<< HEAD
-    templateId: "itmpl_b6SWjM42vGXGVhJSZ4ad1VWL",
-=======
     templateId: TEMP_ID as string,
->>>>>>> 0e3fef35cfac912aae43f088cccdeaf8bb9be6b7
     environment: "sandbox",
     referenceId: userData?.user.address,
     onReady: () => {
@@ -61,17 +57,15 @@ const HumanStatus: NextPage = (props: any) => {
 
   return (
     <div className={styles.wrapper}>
-<<<<<<< HEAD
       <div>
-=======
-      <div className="d-flex align-items-center">
->>>>>>> 0e3fef35cfac912aae43f088cccdeaf8bb9be6b7
-        <button
-          onClick={() => status !== "Wait ..." && client.open()}
-          className={styles.btn}
-        >
-          {status}
-        </button>
+        <div className="d-flex align-items-center">
+          <button
+            onClick={() => status !== "Wait ..." && client.open()}
+            className={styles.btn}
+          >
+            {status}
+          </button>
+        </div>
       </div>
     </div>
   );
