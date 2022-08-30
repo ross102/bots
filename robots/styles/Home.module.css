@@ -12,14 +12,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.verify {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: 40px;
-  background-color: #03a9f4;
 }
 
 .wrapper .btn {
