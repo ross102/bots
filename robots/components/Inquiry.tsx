@@ -57,7 +57,7 @@ const HumanStatus: NextPage = (props: any) => {
 
   return (
     <div className={styles.wrapper}>
-      <div>
+      <div className={styles.verify}>
         <button
           onClick={() => status !== "Wait ..." && client.open()}
           className={styles.btn}
