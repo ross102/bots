@@ -3,9 +3,10 @@ import Persona from "persona";
 import baseApi from "./utils/baseApi";
 import { uuid } from "uuidv4";
 import styles from "../styles/Home.module.css";
-import { useEffect } from "react";
+import { useState } from "react";
 
 const HumanStatus: NextPage = (props: any) => {
+  const [status, setStatus] = useState<string>("Wait ...");
   const userData = props.user;
   //send inquiry to
 
@@ -18,9 +19,7 @@ const HumanStatus: NextPage = (props: any) => {
         profileId: userData.user.profileId,
         status,
       });
-      if (data.data.message) {
-        window.location.href = "/completed";
-      }
+
       console.log(data);
     } catch (error: any) {
       console.log(error.response);
@@ -33,26 +32,41 @@ const HumanStatus: NextPage = (props: any) => {
     );
   };
 
-  useEffect(() => {
-    (() => {
-      const client: any = new Persona.Client({
-        templateId: "itmpl_b6SWjM42vGXGVhJSZ4ad1VWL",
-        environment: "sandbox",
-        referenceId: userData?.user.address,
-        onReady: () => {
-          client.open();
-        },
-        onComplete: async ({ inquiryId, status }) => {
-          submit(inquiryId, status);
-        },
-        onCancel: ({ inquiryId, sessionToken }) => console.log("onCancel"),
-        onError: (error) => console.log(error),
-      });
-    })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userData.user.address]);
+  const client: any = new Persona.Client({
+    templateId: "itmpl_b6SWjM42vGXGVhJSZ4ad1VWL",
+    environment: "sandbox",
+    referenceId: userData?.user.address,
+    onReady: () => {
+      setStatus("Start Verification");
+      console.log("ready to start verification");
+    },
+    onComplete: async ({ inquiryId, status }) => {
+      setStatus("Verification Complete");
+      submit(inquiryId, status);
+      console.log("Verification Complete");
+    },
+    onCancel: ({ inquiryId, sessionToken }) => {
+      setStatus("Cancelled");
+      console.log("Cancelled");
+    },
+    onError: (error) => {
+      setStatus("Error, Try Again");
+      console.log(error);
+    },
+  });
 
-  return <div className={styles.wrapper}>Loading ...please wait</div>;
+  return (
+    <div className={styles.wrapper}>
+      <div>
+        <button
+          onClick={() => status !== "Wait ..." && client.open()}
+          className={styles.btn}
+        >
+          {status}
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default HumanStatus;
