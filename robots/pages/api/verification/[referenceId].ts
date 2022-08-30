@@ -1,4 +1,5 @@
-import db from "../../../components/utils/db";
+import Areyouhuman from "../../../components/utils/services";
+
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -8,9 +9,8 @@ export default async function handler(
   const { referenceId } = req.query;
 
   try {
-    const data = await db.getData(`/${referenceId}/verify`);
-
-    res.status(200).json(data);
+    const resp = await Areyouhuman.getStatus(referenceId);
+    res.status(200).json({ status: resp });
   } catch (error: any) {
     console.log(error.response);
     res.status(400).json({ error });

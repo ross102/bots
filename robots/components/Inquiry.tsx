@@ -9,6 +9,7 @@ const HumanStatus: NextPage = (props: any) => {
   const [status, setStatus] = useState<string>("Wait ...");
   const userData = props.user;
   //send inquiry to
+
   const submit = async (inquiry: string, status: string) => {
     try {
       const data = await baseApi.post("/api/verification/inquiry", {
@@ -18,6 +19,7 @@ const HumanStatus: NextPage = (props: any) => {
         profileId: userData.user.profileId,
         status,
       });
+
       console.log(data);
     } catch (error: any) {
       console.log(error.response);
