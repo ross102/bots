@@ -58,14 +58,12 @@ const HumanStatus: NextPage = (props: any) => {
   return (
     <div className={styles.wrapper}>
       <div>
-        <div className="d-flex align-items-center">
-          <button
-            onClick={() => status !== "Wait ..." && client.open()}
-            className={styles.btn}
-          >
-            {status}
-          </button>
-        </div>
+        <button
+          onClick={() => status !== "Please wait ..." && client.open()}
+          className={styles.btn}
+        >
+          {status}
+        </button>
       </div>
     </div>
   );
