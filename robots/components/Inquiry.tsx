@@ -33,7 +33,7 @@ const HumanStatus: NextPage = (props: any) => {
   };
 
   const client: any = new Persona.Client({
-    templateId: TEMP_ID as string,
+    templateId: "itmpl_b6SWjM42vGXGVhJSZ4ad1VWL",
     environment: "sandbox",
     referenceId: userData?.user.address,
     onReady: () => {
