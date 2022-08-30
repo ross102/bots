@@ -1,5 +1,5 @@
-import Areyouhuman from "../../../components/utils/services";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { getEntry } from "../verification/db/service";
 
 export default async function handler(
   req: NextApiRequest,
@@ -8,10 +8,13 @@ export default async function handler(
   const { referenceId } = req.query;
 
   try {
-    // inq_qUanym8FNvPvKtc9Bwc3ECVD
-    // const inquiryId = await Areyouhuman.getStatus(referenceId);
-    const status = await getInquiryStatus("inq_qUanym8FNvPvKtc9Bwc3ECVD"); // pass inquiry id here
-    res.status(200).json({ status });
+    const entry = await getEntry(referenceId as string);
+    if (entry) {
+      const status = await getInquiryStatus(entry?.inquiryId as string);
+      res.status(200).json({ status });
+    } else {
+      res.status(404).json({ status: "Path Not Found" });
+    }
   } catch (error: any) {
     console.log(error.response);
     res.status(400).json({ error });

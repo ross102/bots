@@ -1,5 +1,5 @@
-import Areyouhuman from "../../../components/utils/services";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { createEntry } from "./db/service";
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,7 +16,7 @@ export default async function handler(
   };
 
   try {
-    Areyouhuman.createInquiry(userData);
+    await createEntry(userData);
     res.status(200).json({ message: "success", user: userData });
   } catch (error: any) {
     console.log(error.response);

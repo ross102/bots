@@ -7,8 +7,8 @@ import { useEffect } from "react";
 
 const HumanStatus: NextPage = (props: any) => {
   const userData = props.user;
-  //send inquiry to
-
+  const TEMP_ID = process.env.NEXT_PUBLIC_TEMP_ID;
+  //send inquiry to backend
   const submit = async (inquiry: string, status: string) => {
     try {
       const data = await baseApi.post("/api/verification/inquiry", {
@@ -34,7 +34,7 @@ const HumanStatus: NextPage = (props: any) => {
   useEffect(() => {
     (() => {
       const client: any = new Persona.Client({
-        templateId: "itmpl_b6SWjM42vGXGVhJSZ4ad1VWL",
+        templateId: TEMP_ID as string,
         environment: "sandbox",
         referenceId: userData?.user.address,
         onReady: () => {
@@ -51,7 +51,6 @@ const HumanStatus: NextPage = (props: any) => {
   }, []);
 
   return <div className={styles.wrapper}>Loading ...</div>;
-
 };
 
 export default HumanStatus;
