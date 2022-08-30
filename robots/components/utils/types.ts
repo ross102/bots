@@ -10,6 +10,7 @@ declare let process: {
 };
 
 export interface IcreateInquiry {
+  [key: string]: string;
   id: string;
   referenceId: string;
   inquiryId: string;

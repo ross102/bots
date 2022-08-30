@@ -1,23 +1,23 @@
-import { JsonDB, Config } from "node-json-db";
+import { Deta } from "deta";
 import { IcreateInquiry } from "../../../../components/utils/types";
 
-const DB_PATH: string = "../../db/verifiedDatabase.json";
+const deta = Deta(process.env.DETA_PROJECT_KEY);
 
-let db = new JsonDB(new Config(DB_PATH, true, false, "/"));
+const base = deta.Base("humanDB");
 
 export async function createEntry(userData: IcreateInquiry) {
   const { referenceId } = userData;
-  db.push(`/${referenceId}/verify`, userData);
+  await base.put(userData, referenceId);
 }
 
 export async function getEntry(referenceId: string) {
   try {
-    return db.getObject<IcreateInquiry>(`/${referenceId}/verify`);
+    return await base.get(referenceId);
   } catch (error) {
     console.log(error);
   }
 }
 
 export async function getAll() {
-  return db.getData("/");
+  return base.fetch([]);
 }
