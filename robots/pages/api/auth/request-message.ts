@@ -1,6 +1,5 @@
 import Moralis from "moralis";
 import process from "../../../components/utils/types";
-import db from "../../../components/utils/db";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const future = new Date();
