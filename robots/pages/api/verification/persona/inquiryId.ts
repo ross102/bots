@@ -1,7 +1,6 @@
 import process from "../../../../components/utils/types";
-import Areyouhuman from "../../../../components/utils/services";
+
 import type { NextApiRequest, NextApiResponse } from "next";
-import axios from "axios";
 
 export default async function handler(
   req: NextApiRequest,
