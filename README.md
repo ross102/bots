@@ -49,7 +49,7 @@ To run the project locally:
 
  ```shell 
  Cd robots directory 
- yarn start
+ yarn dev
  ``` 
  
  Visit localhost:3000 to verify your identity with persona. 
