@@ -35,20 +35,27 @@ Please switch to branch **contract** to view the actual code
 
 ## To verify your identity 
 
- ```shell 
- Cd robots 
- Yarn dev 
- ``` 
-  
- Visit localhost:3000 to verify your identity with persona. 
-  
- 1. Connect with your wallet 
- 2. Authenticate with moralis+ nextjs Auth and sign your signature 
- 3. After login you can be able to access the persona flow 
- 4. Fill in the required details and click submit. 
- 5. Wait for your verification to be approved.
+You can visit our website at <a href="https://areyouhuman.netlify.app">Areyouhuman website</a> to get verified with persona
 
-You can visit http://areyouhuman-ross102.vercel.app/ to try out the persona verification flow.
+<ul>  
+  <li> Connect with your wallet </li> 
+  <li> Authenticate with moralis+ nextjs Auth and sign your signature </li> 
+ <li> After login you can be able to access the persona flow </li>
+ <li> Fill in the required details and click submit. </li>
+ <li> Wait for your verification to be approved and click done.  </li>
+</ul>
+
+To run the project locally:
+
+ ```shell 
+ Cd robots directory 
+ yarn install
+ yarn start
+ ``` 
+ 
+ Visit localhost:3000 to verify your identity with persona. 
+
+## Testnet
 
 Check out the a testnet implementation of onlyHuman modifier at https://goerli.etherscan.io/address/0xE0880410C46b646eD9b9D755d11990212B9af934
 
