@@ -49,7 +49,6 @@ To run the project locally:
 
  ```shell 
  Cd robots directory 
- yarn install
  yarn start
  ``` 
  
