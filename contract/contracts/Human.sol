@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.7;
+pragma solidity ^0.8.10;
 
-import {APIConsumer} from "./APIConsumer.sol";
+import {AreYouHuman} from "./AreYouHuman.sol";
 
 abstract contract Context {
   function _msgSender() internal view virtual returns (address) {
@@ -12,8 +12,8 @@ abstract contract Context {
 
 contract Human is Context {
   address constant consumerContract =
-    0x9Eb6dd0D51522a6aece199B77c431995e58697eB; // fillup
-  APIConsumer consumer = APIConsumer(consumerContract);
+    0x9EbAd392C3ecAe0CEb9b554b94ab44F2c21B8504; // fillup
+  AreYouHuman consumer = AreYouHuman(consumerContract);
 
   modifier onlyHuman() {
     _isVerified();

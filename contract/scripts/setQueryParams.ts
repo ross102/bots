@@ -1,6 +1,6 @@
 import { Contract, ethers } from "ethers";
 import { deployments, getNamedAccounts } from "hardhat";
-import { APIConsumer } from "../typechain-types";
+import { AreYouHuman } from "../typechain-types";
 
 async function main() {
   const wallet = new ethers.Wallet(process.env.PRIVATE_KEY as string);
@@ -14,23 +14,23 @@ async function main() {
     throw new Error("Not enough ether");
   }
   const { deployer } = await getNamedAccounts();
-  const consumerAddress = await (await deployments.get("APIConsumer")).address;
-  const consumerInterface = await (await deployments.get("APIConsumer")).abi;
+  const consumerAddress = await (await deployments.get("AreYouHuman")).address;
+  const consumerInterface = await (await deployments.get("AreYouHuman")).abi;
 
   console.log(
-    `Attaching APIConsumer contract interface to address ${consumerAddress}`
+    `Attaching AreYouHuman contract interface to address ${consumerAddress}`
   );
 
-  const consumerContract: APIConsumer = new Contract(
+  const consumerContract: AreYouHuman = new Contract(
     consumerAddress,
     consumerInterface,
     signer
-  ) as APIConsumer;
+  ) as AreYouHuman;
 
   console.log(`seting params from ${deployer}`);
   const tx = await consumerContract.setQueryParams(
     "status",
-    "https://areyouhuman-ross102.vercel.app/api/verification/persona/"
+    "https://areyouhuman.netlify.app/api/verify/"
   );
   console.log("Awaiting confirmations");
   await tx.wait();
