@@ -14,11 +14,11 @@ export default async function handler(
       const status = await getInquiryStatus(entry?.inquiryId as string);
       res.status(200).json({ status });
     } else {
-      res.status(404).json({ error: "Path Not Found" });
+      res.status(404).json({ status: "404 - Path Not Found" });
     }
   } catch (error: any) {
     console.log(error.response);
-    res.status(400).json({ error: `400 ${error}` });
+    res.status(400).json({ status: `400 - ${error}` });
   }
 }
 

@@ -7,12 +7,12 @@ const base = deta.Base("humanDB");
 
 export async function createEntry(userData: IcreateInquiry) {
   const { referenceId } = userData;
-  await base.put(userData, referenceId);
+  await base.put(userData, referenceId.toLowerCase());
 }
 
 export async function getEntry(referenceId: string) {
   try {
-    return await base.get(referenceId);
+    return await base.get(referenceId.toLowerCase());
   } catch (error) {
     console.log(error);
   }
