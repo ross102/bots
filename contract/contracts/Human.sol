@@ -12,7 +12,7 @@ abstract contract Context {
 
 contract Human is Context {
   address constant consumerContract =
-    0x9EbAd392C3ecAe0CEb9b554b94ab44F2c21B8504; // fillup
+    0xf3ee05925Ffcd122930C870d7c0FB5E9cc86F489; // fillup
   AreYouHuman consumer = AreYouHuman(consumerContract);
 
   modifier onlyHuman() {

@@ -66,9 +66,8 @@ contract AreYouHuman is ChainlinkClient, Ownable {
 
   /**
    * @notice Create a Chainlink request to retrieve API response, and find the target (status).
-   * @return requestId - unique request identifier
    */
-  function requestHumanityStatus() public returns (bytes32 requestId) {
+  function requestHumanityStatus() public {
     Chainlink.Request memory req = buildChainlinkRequest(
       jobId,
       address(this),
@@ -76,8 +75,8 @@ contract AreYouHuman is ChainlinkClient, Ownable {
     );
     req.add("get", getEndpoint(msg.sender));
     req.add("path", path);
+    bytes32 requestId = sendOperatorRequest(req, fee);
     s_RequestIdToUser[requestId] = msg.sender;
-    return sendOperatorRequest(req, fee);
   }
 
   /**
