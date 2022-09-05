@@ -56,6 +56,6 @@ To run the project locally:
 
 ## Testnet
 
-Check out the a testnet implementation of onlyHuman modifier at https://goerli.etherscan.io/address/0xE0880410C46b646eD9b9D755d11990212B9af934
+Check out the a testnet implementation of onlyHuman modifier at https://goerli.etherscan.io/address/0x56e2809A758aA602865cfa0b676b96EF6F57Bd68
 
 Read through our products pitch here https://www.canva.com/design/DAFKivBVh2k/1kJqVBc8i8I-7_rFCKVl2A/view?utm_content=DAFKivBVh2k&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
